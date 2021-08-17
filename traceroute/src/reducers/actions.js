@@ -12,11 +12,11 @@ export const setTarget = (target) => {
     }
 }
 
-export const setRoute = (routes) => {
+export const setRoute = (route) => {
     return (dispatch) => {
         dispatch({
             type: ROUTE,
-            payload: routes
+            payload: route
         })
     }
 }

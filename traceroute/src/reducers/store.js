@@ -4,7 +4,19 @@ import {
 } from './types.js'
 
 const initialState = {
-    
+    mapData: {
+        GoogleMapKey: '',
+        center: {
+            lat: 59.95,
+            lng: 30.33
+        },
+        zoom: 11
+    },
+    route: [   
+        {'lat': 59.95, 'lng': 30.33},
+        {'lat': 59.97, 'lng': 30.32},
+        {'lat': 59.96, 'lng': 30.34}
+    ]
 }
 
 export default (state = initialState, action) => {
