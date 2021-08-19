@@ -14,4 +14,27 @@ body {
   background-color: rgb(30, 30, 30);
   font-family: Consolas, monaco, monospace;
 }
+
+.map {
+  width: 100vw;
+  height: 100vh;
+}
+
+.marker {
+  width: 8vh;
+  height: 8vh;
+  margin-top: -4vh;
+  margin-left: -4vh;
+  border-radius: 8vh;
+  border: 3px solid #f39c12; 
+  opacity: 0.8;
+}
+
+.dot {
+  margin: 3.5vh;
+  width: 1vh;
+  height: 1vh;
+  border-radius: 1vh;
+  background-color: #c0392b;
+}
 /*#endregion */

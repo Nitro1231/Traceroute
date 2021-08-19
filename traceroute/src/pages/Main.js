@@ -3,26 +3,29 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 import * as actions from '../reducers/actions'
 
+import MapTheme from '../assets/MapTheme.json'
+import GoogleMap from 'google-map-react'
+
 import Marker from '../components/Marker'
-import GoogleMapReact from 'google-map-react'
 
 class Main extends React.Component {
     render() {
-
+      console.log(this.props.mapData.GoogleMapKey)
         return(
             <>
-                <div style={{ height: '100vh', width: '100%' }}>
-                <GoogleMapReact
-                    bootstrapURLKeys={{ key: this.props.mapData.key }}
+                <div className='map'>
+                <GoogleMap
+                    bootstrapURLKeys={{ key: this.props.mapData.GoogleMapKey }}
                     defaultCenter={this.props.mapData.center}
                     defaultZoom={this.props.mapData.zoom}
+                    options={{ styles: MapTheme }}
                     >
                     
                     <Marker lat={this.props.route[0]['lat']} lng={this.props.route[0]['lng']} />
                     <Marker lat={this.props.route[1]['lat']} lng={this.props.route[1]['lng']} />
                     <Marker lat={this.props.route[2]['lat']} lng={this.props.route[2]['lng']} />
 
-                </GoogleMapReact>
+                </GoogleMap>
                 </div>
             </>
         )

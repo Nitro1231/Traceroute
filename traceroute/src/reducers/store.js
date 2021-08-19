@@ -1,3 +1,4 @@
+import APIKEY from '../assets/API_KEY.json'
 import {
     TARGET,
     ROUTE
@@ -5,7 +6,7 @@ import {
 
 const initialState = {
     mapData: {
-        GoogleMapKey: '',
+        GoogleMapKey: APIKEY['GoogleMap'],
         center: {
             lat: 59.95,
             lng: 30.33

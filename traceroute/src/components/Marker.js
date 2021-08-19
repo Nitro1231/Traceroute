@@ -3,7 +3,9 @@ import React from 'react'
 class Marker extends React.Component {
     render() {
         return(
-            <div>Test</div>
+            <div className='marker'>
+                <div className='dot' />
+            </div>
         )
     }
 }
