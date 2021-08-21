@@ -4,6 +4,7 @@ import { compose } from "redux";
 import * as actions from "../reducers/actions";
 
 import MapGL, {
+  Layer,
   Popup,
   NavigationControl,
   GeolocateControl,
@@ -23,6 +24,19 @@ const navStyle = {
   padding: "10px",
 };
 
+const paintLayer = {
+  "fill-extrusion-color": "#141414",
+  "fill-extrusion-height": {
+    type: "identity",
+    property: "height",
+  },
+  "fill-extrusion-base": {
+    type: "identity",
+    property: "min_height",
+  },
+  "fill-extrusion-opacity": 0.6,
+};
+
 class Main extends React.Component {
   render() {
     return (
@@ -37,6 +51,16 @@ class Main extends React.Component {
             mapboxApiAccessToken={this.props.map.token}
           >
             <Pin key={1} latitude={37.805} longitude={-122.447} />
+            <Pin key={2} latitude={37.305} longitude={-122.947} />
+            <Layer
+              id="3d-buildings"
+              source="composite"
+              source-layer="building"
+              filter={["==", "extrude", "true"]}
+              type="fill-extrusion"
+              minZoom={8}
+              paint={paintLayer}
+            />
             <GeolocateControl style={geolocateStyle} />
             <NavigationControl style={navStyle} />
           </MapGL>

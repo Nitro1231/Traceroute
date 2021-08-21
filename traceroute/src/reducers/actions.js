@@ -4,7 +4,7 @@ import {
 
 export const setViewport = (viewport) => {
     return (dispatch) => {
-        console.log('event')
+        // console.log(viewport)
         dispatch({
             type: SET_VIEWPORT,
             payload: viewport

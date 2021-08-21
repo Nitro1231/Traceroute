@@ -1,5 +1,10 @@
 import React from "react";
+import { connect } from "react-redux";
+import { compose } from "redux";
+import * as actions from "../reducers/actions";
+
 import { Marker } from "react-map-gl";
+import "mapbox-gl/dist/mapbox-gl.css";
 
 class Pin extends React.Component {
   render() {
@@ -9,7 +14,12 @@ class Pin extends React.Component {
         longitude={this.props.longitude}
         latitude={this.props.latitude}
       >
-        <div className="marker">
+        <div
+          className="marker"
+          style={{
+            transform: `rotateX(${this.props.map.viewport.pitch}deg) rotateZ(${this.props.map.viewport.bearing}deg)`,
+          }}
+        >
           <div className="dot" />
         </div>
       </Marker>
@@ -17,4 +27,7 @@ class Pin extends React.Component {
   }
 }
 
-export default Pin;
+const mapStateToProps = (state) => ({
+  map: state.map,
+});
+export default compose(connect(mapStateToProps, actions))(Pin);

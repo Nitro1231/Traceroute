@@ -10,13 +10,13 @@ const initialState = {
       longitude: -122.447,
       zoom: 15.5,
       bearing: 0,
-      pitch: 0,
+      pitch: 60,
     },
   },
   route: [
-    { lat: 59.95, lng: 30.33 },
-    { lat: 59.97, lng: 30.32 },
-    { lat: 59.96, lng: 30.34 },
+    { latitude: 59.95, longitude: 30.33 },
+    { latitude: 59.97, longitude: 30.32 },
+    { latitude: 59.96, longitude: 30.34 },
   ],
 };
 
