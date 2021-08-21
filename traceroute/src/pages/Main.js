@@ -5,12 +5,14 @@ import * as actions from "../reducers/actions";
 
 import MapGL, {
   Layer,
+  Source,
   Popup,
   NavigationControl,
   GeolocateControl,
 } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import Pin from "../components/Pin";
+import PolylineOverlay from "../components/PolylineOverlay"
 
 const geolocateStyle = {
   top: 0,
@@ -52,6 +54,7 @@ class Main extends React.Component {
           >
             <Pin key={1} latitude={37.805} longitude={-122.447} />
             <Pin key={2} latitude={37.305} longitude={-122.947} />
+            <PolylineOverlay points={[[37.805, -122.447], [37.305, -122.947]]} />
             <Layer
               id="3d-buildings"
               source="composite"
