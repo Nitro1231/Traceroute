@@ -11,8 +11,8 @@ class Pin extends React.Component {
     return (
       <Marker
         key={`Marker-${this.props.key}`}
-        longitude={this.props.longitude}
-        latitude={this.props.latitude}
+        latitude={this.props.point[0]}
+        longitude={this.props.point[1]}
       >
         <div
           className="marker"

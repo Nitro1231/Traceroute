@@ -8,15 +8,17 @@ const initialState = {
     viewport: {
       latitude: 37.805,
       longitude: -122.447,
-      zoom: 15.5,
-      bearing: 0,
+      zoom: 16,
+      bearing: 30,
       pitch: 60,
     },
   },
+  // latitude, longitude
   route: [
-    { latitude: 59.95, longitude: 30.33 },
-    { latitude: 59.97, longitude: 30.32 },
-    { latitude: 59.96, longitude: 30.34 },
+    [37.805, -122.447],
+    [37.305, -122.947],
+    [37.005, 20.947],
+    [40.005, 30.456],
   ],
 };
 
@@ -26,9 +28,9 @@ export default (state = initialState, action) => {
       return {
         ...state,
         map: {
-            ...state.map,
-            viewport: action.payload
-        }
+          ...state.map,
+          viewport: action.payload,
+        },
       };
     default:
       return state;

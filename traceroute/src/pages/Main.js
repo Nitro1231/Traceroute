@@ -5,7 +5,6 @@ import * as actions from "../reducers/actions";
 
 import MapGL, {
   Layer,
-  Source,
   Popup,
   NavigationControl,
   GeolocateControl,
@@ -13,18 +12,6 @@ import MapGL, {
 import "mapbox-gl/dist/mapbox-gl.css";
 import Pin from "../components/Pin";
 import PolylineOverlay from "../components/PolylineOverlay"
-
-const geolocateStyle = {
-  top: 0,
-  left: 0,
-  padding: "10px",
-};
-
-const navStyle = {
-  top: 72,
-  left: 0,
-  padding: "10px",
-};
 
 const paintLayer = {
   "fill-extrusion-color": "#141414",
@@ -52,20 +39,21 @@ class Main extends React.Component {
             onViewportChange={this.props.setViewport}
             mapboxApiAccessToken={this.props.map.token}
           >
-            <Pin key={1} latitude={37.805} longitude={-122.447} />
-            <Pin key={2} latitude={37.305} longitude={-122.947} />
-            <PolylineOverlay points={[[37.805, -122.447], [37.305, -122.947]]} />
+            <Pin key={0} point={this.props.route[0]} />
+            <Pin key={1} point={this.props.route[1]} />
+            <Pin key={2} point={this.props.route[2]} />
+            <Pin key={3} point={this.props.route[3]} />
+            <PolylineOverlay points={this.props.route} />
             <Layer
               id="3d-buildings"
               source="composite"
               source-layer="building"
               filter={["==", "extrude", "true"]}
               type="fill-extrusion"
-              minZoom={8}
               paint={paintLayer}
             />
-            <GeolocateControl style={geolocateStyle} />
-            <NavigationControl style={navStyle} />
+            <GeolocateControl className='map-geolocate' />
+            <NavigationControl className='map-nav' />
           </MapGL>
         </div>
       </>

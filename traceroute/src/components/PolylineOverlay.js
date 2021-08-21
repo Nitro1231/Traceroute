@@ -19,7 +19,7 @@ export default class PolylineOverlay extends PureComponent {
       ctx.strokeStyle = color;
       ctx.beginPath();
       points.forEach((point) => {
-        const pixel = project([point[1], point[0]]);
+        const pixel = project([point[1], point[0]]); // project([longitude, latitude]);
         ctx.lineTo(pixel[0], pixel[1]);
       });
       ctx.setLineDash([3,3]);
