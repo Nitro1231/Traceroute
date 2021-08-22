@@ -37,22 +37,38 @@ body {
 }
 
 .marker {
-  width: 8vh;
-  height: 8vh;
-  margin-top: -4vh;
-  margin-left: -4vh;
-  border: 3px solid transparent;
-  border-radius: 8vh;
-  background-image: linear-gradient(rgb(40, 40, 40), rgb(40, 40, 40)), linear-gradient(135deg, #ff6cab, #7366ff);
-  background-origin: border-box;
-  background-clip: content-box, border-box;
-  opacity: 0.7;
+  content: '';
+  position: absolute;
+  width: 2vh;
+  height: 2vh;
+  border-radius: 50%;
+  background-color: #7366ff;
+  border: 2px solid #fff;
 }
 
-.dot {
-  margin: 3.5vh;
-  width: 1vh;
-  height: 1vh;
-  border-radius: 1vh;
-  background-color: rgb(240, 240, 240);
+.marker::before {
+  content: '';
+  position: absolute;
+  width: 2vh;
+  height: 2vh;
+  border-radius: 50%;
+  background-color: #7366ff;
+  animation: marker-pulse 4s infinite;
+}
+
+.marker::after {
+  margin: -3vh;
+  content: '';
+  position: absolute;
+  width: 8vh;
+  height: 8vh;
+  border-radius: 50%;
+  background-color: #7366ff;
+  opacity: 0.2;
+}
+
+@keyframes marker-pulse {
+  0%   { transform: scale(0); opacity: 1; }
+  70%  { transform: scale(4); opacity: 0; }
+  100% { transform: scale(0); opacity: 0; }
 }

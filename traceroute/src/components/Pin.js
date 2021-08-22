@@ -7,23 +7,26 @@ import { Marker } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
 class Pin extends React.Component {
+  addMarkers = () => {
+    var i = 0;
+    var items = [];
+    this.props.points.forEach((point) => {
+      items.push(
+        <Marker key={`Marker-${i++}`} latitude={point[0]} longitude={point[1]}>
+          <div
+            className="marker"
+            style={{
+              transform: `translate(-50%, -50%) rotateX(${this.props.map.viewport.pitch}deg) rotateZ(${this.props.map.viewport.bearing}deg)`,
+            }}
+          />
+        </Marker>
+      );
+    });
+    return items;
+  };
+
   render() {
-    return (
-      <Marker
-        key={`Marker-${this.props.key}`}
-        latitude={this.props.point[0]}
-        longitude={this.props.point[1]}
-      >
-        <div
-          className="marker"
-          style={{
-            transform: `rotateX(${this.props.map.viewport.pitch}deg) rotateZ(${this.props.map.viewport.bearing}deg)`,
-          }}
-        >
-          <div className="dot" />
-        </div>
-      </Marker>
-    );
+    return <>{this.addMarkers()}</>;
   }
 }
 

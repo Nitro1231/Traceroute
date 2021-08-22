@@ -11,7 +11,7 @@ import MapGL, {
 } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import Pin from "../components/Pin";
-import PolylineOverlay from "../components/PolylineOverlay"
+import Line from "../components/Line";
 
 const paintLayer = {
   "fill-extrusion-color": "#141414",
@@ -39,11 +39,8 @@ class Main extends React.Component {
             onViewportChange={this.props.setViewport}
             mapboxApiAccessToken={this.props.map.token}
           >
-            <Pin key={0} point={this.props.route[0]} />
-            <Pin key={1} point={this.props.route[1]} />
-            <Pin key={2} point={this.props.route[2]} />
-            <Pin key={3} point={this.props.route[3]} />
-            <PolylineOverlay points={this.props.route} />
+            <Pin points={this.props.route} />
+            <Line points={this.props.route} />
             <Layer
               id="3d-buildings"
               source="composite"
@@ -52,8 +49,8 @@ class Main extends React.Component {
               type="fill-extrusion"
               paint={paintLayer}
             />
-            <GeolocateControl className='map-geolocate' />
-            <NavigationControl className='map-nav' />
+            <GeolocateControl className="map-geolocate" />
+            <NavigationControl className="map-nav" />
           </MapGL>
         </div>
       </>

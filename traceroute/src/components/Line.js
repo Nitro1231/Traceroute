@@ -1,10 +1,8 @@
-// https://github.com/visgl/react-map-gl/issues/591#issuecomment-628873677
-
-import React, { PureComponent } from "react";
+import React from "react";
 import { CanvasOverlay } from "react-map-gl";
 
-export default class PolylineOverlay extends PureComponent {
-  _redraw({ width, height, ctx, isDragging, project, unproject }) {
+class Line extends React.Component {
+  redraw({ width, height, ctx, isDragging, project, unproject }) {
     const {
       points,
       color = "#35A9CA",
@@ -28,6 +26,8 @@ export default class PolylineOverlay extends PureComponent {
   }
 
   render() {
-    return <CanvasOverlay redraw={this._redraw.bind(this)} />;
+    return <CanvasOverlay redraw={this.redraw.bind(this)} />;
   }
 }
+
+export default Line;
