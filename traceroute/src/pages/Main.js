@@ -26,11 +26,20 @@ const paintLayer = {
   "fill-extrusion-opacity": 0.6,
 };
 
+window.api.receive("receive-test-event", (data) => {
+  console.log(data)
+});
+
+const ipcEventTrigger = (arg) => {
+  window.api.send('send-test-event', arg);
+}
+
 class Main extends React.Component {
   render() {
     return (
       <>
         <div className="map">
+          {ipcEventTrigger('test arg')}
           <MapGL
             {...this.props.map.viewport}
             width="100%"

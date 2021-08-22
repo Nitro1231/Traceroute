@@ -1,14 +1,18 @@
+const { app, BrowserWindow, ipcMain } = require("electron");
+const isDev = require("electron-is-dev");
 const path = require("path");
 
-const { app, BrowserWindow } = require("electron");
-const isDev = require("electron-is-dev");
+let win;
 
 function createWindow() {
-  const win = new BrowserWindow({
+  win = new BrowserWindow({
     width: 1500,
     height: 800,
     webPreferences: {
-      nodeIntegration: true,
+      nodeIntegration: false,
+      contextIsolation: true, // protect against prototype pollution
+      enableRemoteModule: false,
+      preload: path.join(__dirname, "preload.js") // use a preload script
     },
   });
 
@@ -35,4 +39,9 @@ app.on("activate", () => {
   if (BrowserWindow.getAllWindows().length === 0) {
     createWindow();
   }
+});
+
+ipcMain.on("send-test-event", (event, arg) => {
+  console.log(`test-event has triggered! arg: ${arg}`)
+  win.webContents.send('receive-test-event', 'test-event reply')
 });
