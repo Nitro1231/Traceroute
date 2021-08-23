@@ -2,6 +2,8 @@ const { app, BrowserWindow, ipcMain } = require("electron");
 const isDev = require("electron-is-dev");
 const path = require("path");
 
+const Traceroute = require("nodejs-traceroute");
+
 let win;
 
 function createWindow() {
@@ -12,7 +14,7 @@ function createWindow() {
       nodeIntegration: false,
       contextIsolation: true, // protect against prototype pollution
       enableRemoteModule: false,
-      preload: path.join(__dirname, "preload.js") // use a preload script
+      preload: path.join(__dirname, "preload.js"), // use a preload script
     },
   });
 
@@ -41,7 +43,45 @@ app.on("activate", () => {
   }
 });
 
-ipcMain.on("send-test-event", (event, arg) => {
-  console.log(`test-event has triggered! arg: ${arg}`)
-  win.webContents.send('receive-test-event', 'test-event reply')
+let tracerouteList = {};
+tracerouteList["Destinations"] = {};
+
+ipcMain.on("doTraceroute", (event, destination) => {
+  if (destination in tracerouteList["Destinations"]) {
+    console.log("[Traceroute] The job is already in progress.");
+  } else {
+    tracerouteList["Destinations"][destination] = true;
+    win.webContents.send("returnTraceroute", {
+      Destination: destination,
+      hop: null,
+    });
+    console.log(
+      `[Traceroute] Traceroute event triggered. (Destination: ${destination}).`
+    );
+    try {
+      const tracer = new Traceroute();
+      tracer
+        .on("pid", (pid) => {
+          console.log(`[Traceroute] PID: ${pid}`);
+        })
+        .on("destination", (destination) => {
+          console.log(`[Traceroute] Destination: ${destination}`);
+        })
+        .on("hop", (hop) => {
+          const data = {
+            Destination: destination,
+            hop: JSON.stringify(hop),
+          }
+          console.log(`[Traceroute] hop: ${data}`);
+          win.webContents.send("returnTraceroute", data);
+        })
+        .on("close", (code) => {
+          console.log(`[Traceroute] Job terminated: Code ${code}`);
+          delete tracerouteList["Destinations"][destination]
+        });
+      tracer.trace(destination);
+    } catch (ex) {
+      console.log(ex);
+    }
+  }
 });

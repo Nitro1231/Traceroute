@@ -11,6 +11,7 @@
     "electron": "^13.2.1",
     "electron-is-dev": "^2.0.0",
     "mapbox-gl": "^2.4.1",
+    "nodejs-traceroute": "^1.2.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-map-gl": "^6.1.16",

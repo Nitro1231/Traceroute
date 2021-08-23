@@ -26,20 +26,20 @@ const paintLayer = {
   "fill-extrusion-opacity": 0.6,
 };
 
-window.api.receive("receive-test-event", (data) => {
-  console.log(data)
+window.api.receive("returnTraceroute", (data) => {
+  console.log(data);
 });
 
-const ipcEventTrigger = (arg) => {
-  window.api.send('send-test-event', arg);
-}
+const doTraceroute = (destination) => {
+  window.api.send("doTraceroute", destination);
+};
 
 class Main extends React.Component {
   render() {
     return (
       <>
         <div className="map">
-          {ipcEventTrigger('test arg')}
+          {doTraceroute("github.com")}
           <MapGL
             {...this.props.map.viewport}
             width="100%"
