@@ -39,7 +39,7 @@ class Main extends React.Component {
     return (
       <>
         <div className="map">
-          {doTraceroute("github.com")}
+          {/* {doTraceroute("github.com")} */}
           <MapGL
             {...this.props.map.viewport}
             width="100%"
